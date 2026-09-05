@@ -2,7 +2,6 @@
 let isPlaying = false;
 let player = null;
 let playerReady = false;
-let currentSlide = 0;
 const totalSlides = 6;
 let enableMusic = false;
 
@@ -230,56 +229,79 @@ function initializeCountdown() {
     setInterval(updateCountdown, 1000);
 }
 
-// Carrusel
+// Carrusel (loop infinito real con clones: al llegar a la última foto avanza
+// hacia una copia de la primera y luego "teletransporta" sin transición de
+// vuelta al inicio real, así siempre se ve avanzando de derecha a izquierda,
+// nunca retrocediendo)
+let carouselIndex = 1; // arranca en la 1ª foto real (índice 0 es el clon de la última)
+let carouselTransitioning = false;
+
 function initializeCarousel() {
     const track = document.getElementById('carouselTrack');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
-    const currentSlideElement = document.getElementById('currentSlide');
     const totalSlidesElement = document.getElementById('totalSlides');
-    
+
     totalSlidesElement.textContent = totalSlides;
+
+    // Posición inicial sin animación
+    track.style.transition = 'none';
+    track.style.transform = `translateX(${-carouselIndex * 100}%)`;
     updateSlideCounter();
-    
+
+    track.addEventListener('transitionend', () => {
+        if (carouselIndex === totalSlides + 1) {
+            // Llegó al clon de la primera foto: salta sin animar a la real
+            carouselIndex = 1;
+            track.style.transition = 'none';
+            track.style.transform = `translateX(${-carouselIndex * 100}%)`;
+            void track.offsetWidth; // fuerza reflow antes de reactivar la transición
+        } else if (carouselIndex === 0) {
+            // Llegó al clon de la última foto (retroceso manual): salta a la real
+            carouselIndex = totalSlides;
+            track.style.transition = 'none';
+            track.style.transform = `translateX(${-carouselIndex * 100}%)`;
+            void track.offsetWidth;
+        }
+        carouselTransitioning = false;
+    });
+
     prevBtn.addEventListener('click', () => {
-        if (currentSlide > 0) {
-            currentSlide--;
-        } else {
-            currentSlide = totalSlides - 1;
-        }
-        updateCarousel();
+        if (carouselTransitioning) return;
+        carouselTransitioning = true;
+        carouselIndex--;
+        goToCarouselSlide();
     });
-    
+
     nextBtn.addEventListener('click', () => {
-        if (currentSlide < totalSlides - 1) {
-            currentSlide++;
-        } else {
-            currentSlide = 0;
-        }
-        updateCarousel();
+        if (carouselTransitioning) return;
+        carouselTransitioning = true;
+        carouselIndex++;
+        goToCarouselSlide();
     });
-    
-    // Auto-play del carrusel
+
+    // Auto-play del carrusel: siempre avanza (derecha a izquierda)
     setInterval(() => {
-        if (currentSlide < totalSlides - 1) {
-            currentSlide++;
-        } else {
-            currentSlide = 0;
-        }
-        updateCarousel();
+        if (carouselTransitioning) return;
+        carouselTransitioning = true;
+        carouselIndex++;
+        goToCarouselSlide();
     }, 4000);
 }
 
-function updateCarousel() {
+function goToCarouselSlide() {
     const track = document.getElementById('carouselTrack');
-    const translateX = -currentSlide * 100;
-    track.style.transform = `translateX(${translateX}%)`;
+    track.style.transition = 'transform 0.5s ease-in-out';
+    track.style.transform = `translateX(${-carouselIndex * 100}%)`;
     updateSlideCounter();
 }
 
 function updateSlideCounter() {
     const currentSlideElement = document.getElementById('currentSlide');
-    currentSlideElement.textContent = currentSlide + 1;
+    let display = carouselIndex;
+    if (display === 0) display = totalSlides;
+    else if (display === totalSlides + 1) display = 1;
+    currentSlideElement.textContent = display;
 }
 
 // Parallax en la portada izquierda (layer transform to emulate fixed background)

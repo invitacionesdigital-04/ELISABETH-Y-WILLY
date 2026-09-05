@@ -543,10 +543,10 @@ body {
     font-size: clamp(0.95rem, 2.6vw, 1.35rem);
     line-height: 1.5;
     color: hsl(var(--brown-dark));
-    -webkit-text-stroke: 1px #000000;
+    -webkit-text-stroke: 1px #ffffff;
     text-shadow:
-        -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000,
-        0 2px 8px rgba(0, 0, 0, 0.6);
+        -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff,
+        0 2px 8px rgba(0, 0, 0, 0.35);
     margin-bottom: 0.75rem;
 }
 
@@ -557,10 +557,10 @@ body {
     text-transform: uppercase;
     font-size: clamp(0.75rem, 1.8vw, 0.95rem);
     color: hsl(var(--brown-dark));
-    -webkit-text-stroke: 0.75px #000000;
+    -webkit-text-stroke: 0.75px #ffffff;
     text-shadow:
-        -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000,
-        0 2px 8px rgba(0, 0, 0, 0.6);
+        -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff,
+        0 2px 8px rgba(0, 0, 0, 0.35);
 }
 
 @media (max-width: 480px) {
@@ -802,13 +802,13 @@ body {
 
 .countdown-label {
 	font-size: clamp(0.7rem, 2.5vw, 0.85rem);
-	color: hsl(var(--brown));
+	color: hsl(33 34% 45%); /* dorado original del conteo, sin el recolor a rojo */
 	text-transform: uppercase;
 	letter-spacing: 0.18em;
 	opacity: 0.9;
 }
 
-.countdown-separator { color: hsl(var(--brown-light)); }
+.countdown-separator { color: hsl(33 24% 60%); /* dorado claro original */ }
 
 /* Evitar ruptura en móviles muy pequeños */
 @media (max-width: 480px) {
