@@ -16,6 +16,8 @@
     --shadow-gold: 0 4px 20px hsl(33 34% 48% / 0.22);
     /* Nuevo tono para laterales tipo papel (blanco piedra) */
     --paper-side: 0 0% 97%;
+    /* Color vino tomado de la tipografía del pase físico (PDF) */
+    --wine: 354 68% 22%;
 }
 
 /* Contenedor centrado tipo tarjeta */
@@ -251,8 +253,7 @@ body {
     content: "";
     position: absolute;
     inset: -40vh -10vw -40vh -10vw;
-    /* Portada (foto0), fondo desenfocado del modal */
-    background-image: url('https://raw.githubusercontent.com/invitacionesdigital-04/Numerodecuenta/main/foto0.jpg');
+    background-image: url('foto0.jpeg');
     background-size: cover;
     background-position: center;
     opacity: 0.55;
@@ -513,13 +514,57 @@ body {
     left: 0;
     width: 100%;
     height: calc(100% + 60px);
-    /* Portada (foto0) */
-    background-image: url('https://raw.githubusercontent.com/invitacionesdigital-04/Numerodecuenta/main/foto0.jpg');
+    background-image: url('foto0.jpeg');
     background-size: cover;
     background-position: center 20%; /* prioriza mostrar la parte de arriba (rostros) en vez del centro */
     background-repeat: no-repeat;
     transform: translateY(0);
     will-change: transform;
+}
+
+/* Portada única (un solo panel a todo el ancho, sin lado derecho) */
+.hero-split--single {
+    grid-template-columns: 1fr;
+}
+
+/* Tarjeta con el versículo, centrada sobre la foto de portada */
+.hero-quote-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: min(88%, 620px);
+    background: hsl(var(--warm-white) / 0.92);
+    border: 1px solid hsl(var(--gold) / 0.4);
+    border-radius: 4px;
+    padding: clamp(1.25rem, 4vw, 2.25rem) clamp(1.25rem, 5vw, 2.75rem);
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(2px);
+}
+
+.hero-quote-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: clamp(0.95rem, 2.6vw, 1.35rem);
+    line-height: 1.5;
+    color: hsl(var(--wine));
+    margin-bottom: 0.75rem;
+}
+
+.hero-quote-ref {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: clamp(0.75rem, 1.8vw, 0.95rem);
+    color: hsl(var(--gold-dark));
+}
+
+@media (max-width: 480px) {
+    .hero-quote-card { padding: 1.1rem 1.25rem; }
 }
 
 /* Image container for left hero image */
@@ -635,7 +680,6 @@ body {
 }
 
 /* Sections */
-.intro-section,
 .countdown-section,
 .events-section,
 .gallery-section,
@@ -657,7 +701,6 @@ body {
     background-color: hsl(var(--warm-white));
 }
 
-.intro-section,
 .events-section,
 .party-section,
 .rsvp-section {
@@ -1330,173 +1373,6 @@ body {
 	.hero-right img { width: 100%; height: auto; object-fit: contain; object-position: center; display: block; }
     /* Desactivar attachment fijo en móvil por compatibilidad/performance */
     .hero-left { background-attachment: scroll !important; }
-}
-
-/* ===== Estilos añadidos para la invitación de Elizabeth & Willy ===== */
-
-/* Bendición / familias (nueva sección introductoria) */
-.intro-section {
-    text-align: center;
-    max-width: 40rem;
-    margin: 0 auto;
-}
-
-.intro-lead {
-    color: hsl(var(--foreground) / 0.8);
-    font-family: 'Playfair Display', serif;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-}
-
-.intro-shout {
-    font-family: 'Great Vibes', cursive;
-    font-size: 2.75rem;
-    color: hsl(var(--brown));
-    margin-bottom: 1.5rem;
-}
-
-.intro-blessing {
-    color: hsl(var(--foreground) / 0.7);
-    margin-bottom: 1rem;
-}
-
-.intro-families {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    color: hsl(var(--brown-dark));
-    font-size: 1.15rem;
-    line-height: 1.8;
-    margin-bottom: 1.5rem;
-}
-
-/* Nota adicional en la sección de invitados (no se permiten niños) */
-.guest-note {
-    color: hsl(var(--brown-dark));
-    font-size: 0.9rem;
-    font-weight: 600;
-    margin-top: 0.5rem;
-}
-
-/* Un solo evento centrado (ya no hay ceremonia + celebración separadas) */
-.events-container--single {
-    display: flex;
-    justify-content: center;
-}
-
-.event-card--single {
-    max-width: 26rem;
-    width: 100%;
-}
-
-/* Versículo bíblico, a modo de franja de contraste dentro de la sección de ceremonia */
-.verse-block {
-    max-width: 44rem;
-    margin: 3rem auto 0;
-    padding: 1.75rem 1.5rem;
-    text-align: center;
-    background-color: hsl(var(--warm-white));
-    border-radius: 0.5rem;
-}
-
-.verse-block p {
-    font-style: italic;
-    color: hsl(var(--foreground) / 0.8);
-    line-height: 1.6;
-    margin-bottom: 0.75rem;
-}
-
-.verse-block cite {
-    display: block;
-    font-style: normal;
-    color: hsl(var(--brown));
-    font-weight: 600;
-    letter-spacing: 0.05em;
-}
-
-/* Vestimenta: una sola tarjeta centrada + muestras de color a evitar */
-.party-grid--single {
-    display: flex;
-    justify-content: center;
-}
-
-.party-grid--single .party-card {
-    max-width: 24rem;
-    width: 100%;
-}
-
-.color-swatches {
-    display: flex;
-    justify-content: center;
-    gap: 0.75rem;
-    margin: 1rem 0 1.5rem;
-}
-
-.swatch {
-    width: 2.25rem;
-    height: 2.25rem;
-    border-radius: 50%;
-    display: inline-block;
-    border: 1px solid hsl(var(--foreground) / 0.25);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
-}
-
-.swatch--white {
-    border: 1px solid hsl(var(--foreground) / 0.4);
-}
-
-/* Tarjeta con los datos bancarios del regalo */
-.gift-account-card {
-    max-width: 22rem;
-    margin: 0 auto 1.5rem;
-    padding: 1.5rem;
-    background-color: #ffffff;
-    border: 1px solid hsl(var(--gold) / 0.25);
-    border-radius: 0.75rem;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-    text-align: center;
-}
-
-.gift-account-label {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    color: hsl(var(--brown));
-    letter-spacing: 0.05em;
-    margin-bottom: 0.5rem;
-}
-
-.gift-account-number {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: hsl(var(--brown-dark));
-    letter-spacing: 0.05em;
-    margin-bottom: 0.5rem;
-}
-
-.gift-account-holder {
-    color: hsl(var(--foreground) / 0.8);
-    margin-bottom: 0.25rem;
-}
-
-.gift-account-id {
-    color: hsl(var(--foreground) / 0.6);
-    font-size: 0.9rem;
-    margin-bottom: 1.25rem;
-}
-
-/* Botones de confirmación (Elizabeth / Willy) */
-.rsvp-buttons {
-    display: flex;
-    flex-direction: row;
-    gap: 0.75rem;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-top: 0.5rem;
-}
-
-@media (max-width: 480px) {
-    .rsvp-buttons { flex-direction: column; }
-    .rsvp-buttons .btn-wedding { width: 100%; }
 }
 
 /* Desktop-specific: (parallax por capa, ya no usamos background-attachment) */

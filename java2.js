@@ -327,7 +327,8 @@ function initializeParallax() {
 // Funciones de los botones
 function openLocation(location) {
     const addresses = {
-        ceremony: "La Rambla Restaurante y Eventos, C/ Cesar Nicolás Penson 157, La Esperilla, Santo Domingo, República Dominicana"
+        ceremony: "La Rambla Restaurante y Eventos, C/ Cesar Nicolás Penson, 157, La Esperilla, República Dominicana",
+        celebration: "Salón de fiestas Avril, Av. Los Reartes 12, Santo Domingo"
     };
     
     const address = addresses[location];
@@ -336,34 +337,19 @@ function openLocation(location) {
 }
 
 function showDressCode() {
-    showToast("Vestimenta", "Formal. Por favor no asistir con los colores mostrados arriba 👗");
+    showToast("Código de Vestimenta", "Formal. Nota: por favor no asistir con los siguientes colores: vino tinto, malva, beige y blanco 👗");
 }
 
-// TODO: reemplazar estos números por los reales de Elizabeth y Willy (formato: código de país + número, sin espacios ni signos, ej. "18091234567")
-const RSVP_WHATSAPP = {
-    elizabeth: "1234567890",
-    willy: "1234567890"
-};
-
-function confirmAttendance(person) {
-    const names = { elizabeth: "Elizabeth", willy: "Willy" };
-    const name = names[person] || "";
-    const number = RSVP_WHATSAPP[person] || RSVP_WHATSAPP.elizabeth;
-    const message = `¡Hola ${name}! Quiero confirmar mi asistencia a la boda de Elizabeth y Willy el 28 de noviembre 💒✨`;
-    const whatsappUrl = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
+function sharePhotos() {
+    showToast("Comparte tus Fotos", "Sube aquí las fotos y videos que tomes durante el evento para que las disfrutemos todos 📸");
 }
 
-// Copiar el número de cuenta del regalo al portapapeles
-function copyGiftAccount() {
-    const accountNumber = document.getElementById('giftAccountNumber').textContent.trim();
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(accountNumber)
-            .then(() => showToast("Copiado", "Número de cuenta copiado al portapapeles 📋"))
-            .catch(() => showToast("Reservas - Ahorro", accountNumber));
-    } else {
-        showToast("Reservas - Ahorro", accountNumber);
-    }
+function openGiftLink() {
+    window.open('https://invitacionesdigital-04.github.io/Numerodecuenta/', '_blank');
+}
+
+function confirmAttendance() {
+    window.open('https://invitacionesdigital-04.github.io/Numerodecuenta/', '_blank');
 }
 
 // Sistema de Toast
