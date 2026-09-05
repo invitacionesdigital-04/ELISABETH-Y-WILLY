@@ -523,14 +523,10 @@ body {
     grid-template-columns: 1fr;
 }
 
-/* Versículo centrado sobre la foto de portada: solo texto, sin recuadro */
+/* Versículo debajo del conteo regresivo, misma sección: solo texto rojo vino, sin contorno */
 .hero-quote-card {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
     width: min(88%, 640px);
+    margin: 2.5rem auto 0;
     text-align: center;
 }
 
@@ -543,10 +539,6 @@ body {
     font-size: clamp(0.95rem, 2.6vw, 1.35rem);
     line-height: 1.5;
     color: hsl(var(--brown-dark));
-    -webkit-text-stroke: 1px #ffffff;
-    text-shadow:
-        -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff,
-        0 2px 8px rgba(0, 0, 0, 0.35);
     margin-bottom: 0.75rem;
 }
 
@@ -557,10 +549,6 @@ body {
     text-transform: uppercase;
     font-size: clamp(0.75rem, 1.8vw, 0.95rem);
     color: hsl(var(--brown-dark));
-    -webkit-text-stroke: 0.75px #ffffff;
-    text-shadow:
-        -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff,
-        0 2px 8px rgba(0, 0, 0, 0.35);
 }
 
 @media (max-width: 480px) {
@@ -996,7 +984,7 @@ body {
 
 .carousel-item {
     flex: 0 0 100%;
-    height: 480px;
+    height: 560px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1267,7 +1255,7 @@ body {
         grid-template-columns: 1fr;
     }
     .carousel-item {
-        height: 320px;
+        height: 380px;
     }
     .carousel-btn {
         width: 40px;
@@ -1287,7 +1275,7 @@ body {
         font-size: 2.5rem;
     }
     .carousel-item {
-        height: 280px;
+        height: 330px;
     }
     .modal-content {
         padding: 1.5rem;

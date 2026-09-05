@@ -2,7 +2,7 @@
 let isPlaying = false;
 let player = null;
 let playerReady = false;
-const totalSlides = 6;
+const totalSlides = 10;
 let enableMusic = false;
 
 // Inicializar cuando el DOM esté listo
