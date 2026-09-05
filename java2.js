@@ -286,7 +286,7 @@ function initializeCarousel() {
         carouselTransitioning = true;
         carouselIndex++;
         goToCarouselSlide();
-    }, 4000);
+    }, 2500);
 }
 
 function goToCarouselSlide() {

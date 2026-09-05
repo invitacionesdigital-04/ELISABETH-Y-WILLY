@@ -948,9 +948,9 @@ body {
 }
 
 .camera-icon {
-    width: 4rem;
-    height: 4rem;
-    margin: 0 auto 3rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    margin: 0 auto 1.75rem;
     padding: 1rem;
     border-radius: 50%;
     background-color: hsl(var(--gold) / 0.1);
@@ -984,7 +984,7 @@ body {
 
 .carousel-item {
     flex: 0 0 100%;
-    height: 560px;
+    height: 600px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1255,7 +1255,7 @@ body {
         grid-template-columns: 1fr;
     }
     .carousel-item {
-        height: 380px;
+        height: 400px;
     }
     .carousel-btn {
         width: 40px;
@@ -1275,7 +1275,7 @@ body {
         font-size: 2.5rem;
     }
     .carousel-item {
-        height: 330px;
+        height: 350px;
     }
     .modal-content {
         padding: 1.5rem;
@@ -1330,23 +1330,7 @@ body {
 	line-height: 1.5;
 }
 
-/* Enlarge camera icon container for better balance */
-.camera-icon {
-	width: 6rem;
-	height: 6rem;
-	margin: 0 auto 3rem;
-	padding: 1rem;
-	border-radius: 50%;
-	background-color: hsl(var(--gold) / 0.1);
-	border: 2px solid hsl(var(--gold));
-	box-shadow: var(--shadow-elegant);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	color: hsl(var(--gold));
-	filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
-	animation: gentle-bounce 2s ease-in-out infinite;
-}
+/* (Duplicado de .camera-icon eliminado: la regla vigente está más arriba) */
 
 /* Mobile-specific hero heights */
 @media (max-width: 768px) {
