@@ -3,7 +3,7 @@ let isPlaying = false;
 let player = null;
 let playerReady = false;
 const totalSlides = 10;
-let enableMusic = null; // null = aún no elige, true = con música, false = sin música
+let enableMusic = false;
 
 // Inicializar cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', function() {
@@ -83,29 +83,21 @@ function initializeModal() {
         modal.style.display = 'none';
         document.getElementById('musicPlayer').style.display = 'block';
 
-        // El player ya existe y viene reproduciendo silenciado desde que cargó
-        // (autoplay:1, mute:1), así que aquí solo hace falta "des-silenciarlo".
-        // unMute() dentro del mismo tick del click es lo que iOS permite de
-        // forma confiable (más que un playVideo() en frío).
+        // El player ya existe (se precargó en DOMContentLoaded), así que
+        // playVideo() se llama de inmediato, dentro del mismo tick del click.
+        // Eso es lo que iOS necesita para no bloquear el audio.
         if (playerReady && player) {
-            player.unMute();
-            player.setVolume(100);
             player.playVideo();
             isPlaying = true;
             updateMusicIcon();
         }
         // Si el player todavía no está listo (conexión lenta), onPlayerReady
-        // se encarga de des-silenciarlo apenas termine de inicializar.
+        // se encarga de reproducir apenas termine de inicializar.
     });
 
     enterWithoutMusic.addEventListener('click', function() {
         enableMusic = false;
         modal.style.display = 'none';
-
-        if (playerReady && player) {
-            player.pauseVideo();
-        }
-        // Si el player no está listo aún, onPlayerReady lo dejará pausado.
     });
 }
 
@@ -124,8 +116,7 @@ function initializeYouTubePlayer() {
         width: '1',
         videoId: 'jwP1HRmDVII',
         playerVars: {
-            autoplay: 1,
-            mute: 1,
+            autoplay: 0,
             controls: 0,
             disablekb: 1,
             fs: 0,
@@ -150,17 +141,14 @@ function onPlayerReady(event) {
     const musicToggle = document.getElementById('musicToggle');
     musicToggle.addEventListener('click', toggleMusic);
 
-    // Casos borde: el usuario ya eligió en el modal antes de que el player
-    // terminara de inicializar (ej. conexión lenta).
-    if (enableMusic === true) {
+    // Caso borde: el usuario ya hizo click en "con música" antes de que el
+    // player terminara de inicializar (ej. conexión lenta). Lo reproducimos
+    // apenas esté listo.
+    if (enableMusic && !isPlaying) {
         document.getElementById('musicPlayer').style.display = 'block';
-        event.target.unMute();
-        event.target.setVolume(100);
         event.target.playVideo();
         isPlaying = true;
         updateMusicIcon();
-    } else if (enableMusic === false) {
-        event.target.pauseVideo();
     }
 }
 
