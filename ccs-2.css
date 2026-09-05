@@ -539,7 +539,7 @@ body {
     font-style: normal;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.01em;
     font-size: clamp(0.95rem, 2.6vw, 1.35rem);
     line-height: 1.5;
     color: hsl(var(--brown-dark));
@@ -802,13 +802,13 @@ body {
 
 .countdown-label {
 	font-size: clamp(0.7rem, 2.5vw, 0.85rem);
-	color: hsl(33 34% 45%); /* dorado original del conteo, sin el recolor a rojo */
+	color: hsl(var(--brown));
 	text-transform: uppercase;
 	letter-spacing: 0.18em;
 	opacity: 0.9;
 }
 
-.countdown-separator { color: hsl(33 24% 60%); /* dorado claro original */ }
+.countdown-separator { color: hsl(var(--brown-light)); }
 
 /* Evitar ruptura en móviles muy pequeños */
 @media (max-width: 480px) {
