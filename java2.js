@@ -347,23 +347,13 @@ function initializeParallax() {
 }
 
 // Funciones de los botones
-function openLocation(location) {
-    const addresses = {
-        ceremony: "La Rambla Restaurante y Eventos, C/ Cesar Nicolás Penson, 157, La Esperilla, República Dominicana",
-        celebration: "Salón de fiestas Avril, Av. Los Reartes 12, Santo Domingo"
-    };
-    
-    const address = addresses[location];
-    const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
-    window.open(mapsUrl, '_blank');
-}
 
 function showDressCode() {
     showToast("Código de Vestimenta", "Formal. Nota: por favor no asistir con los siguientes colores: vino tinto, malva, beige y blanco 👗");
 }
 
 function sharePhotos() {
-    showToast("Comparte tus Fotos", "Sube aquí las fotos y videos que tomes durante el evento para que las disfrutemos todos 📸");
+    window.open('https://photos.app.goo.gl/5gzRABHjuNhGsoVP8', '_blank');
 }
 
 function openGiftLink() {
@@ -371,7 +361,7 @@ function openGiftLink() {
 }
 
 function confirmAttendance() {
-    window.open('https://invitacionesdigital-04.github.io/Numerodecuenta/', '_blank');
+    window.open('https://docs.google.com/forms/d/e/1FAIpQLScE--FHaXBwnoUl_yjudMz-rZywKmJ2TRczQNtEuV9yKi-CcQ/viewform?usp=header', '_blank');
 }
 
 // Sistema de Toast
