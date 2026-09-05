@@ -2,22 +2,20 @@
 :root {
     --background: 0 0% 96%;
     --foreground: 30 15% 18%;
-    --primary: 33 34% 45%;
+    --primary: 0 60% 38%;
     --primary-foreground: 0 0% 96%;
-    --gold: 33 34% 48%;
-    --gold-light: 33 28% 66%;
-    --gold-dark: 33 38% 36%;
-    --brown: 33 34% 45%;
-    --brown-light: 33 24% 60%;
-    --brown-dark: 33 40% 28%;
+    --gold: 0 58% 42%;
+    --gold-light: 0 45% 90%;
+    --gold-dark: 0 62% 34%;
+    --brown: 0 68% 28%;
+    --brown-light: 0 40% 93%;
+    --brown-dark: 0 72% 20%;
     --cream: 0 0% 98%;
     --warm-white: 33 26% 93%;
-    --shadow-elegant: 0 10px 30px -10px hsl(33 34% 45% / 0.28);
-    --shadow-gold: 0 4px 20px hsl(33 34% 48% / 0.22);
+    --shadow-elegant: 0 10px 30px -10px hsl(0 60% 38% / 0.28);
+    --shadow-gold: 0 4px 20px hsl(0 58% 42% / 0.22);
     /* Nuevo tono para laterales tipo papel (blanco piedra) */
     --paper-side: 0 0% 97%;
-    /* Color vino tomado de la tipografía del pase físico (PDF) */
-    --wine: 354 68% 22%;
 }
 
 /* Contenedor centrado tipo tarjeta */
@@ -510,14 +508,13 @@ body {
 .hero-left-bg {
     position: absolute;
     inset: 0;
-    top: -60px; /* colchón fijo y pequeño: evita el hueco sin forzar zoom extra en la imagen */
-    left: 0;
     width: 100%;
-    height: calc(100% + 60px);
+    height: 100%;
     background-image: url('foto0.jpeg');
-    background-size: cover;
-    background-position: center 20%; /* prioriza mostrar la parte de arriba (rostros) en vez del centro */
+    background-size: contain;
+    background-position: center;
     background-repeat: no-repeat;
+    background-color: hsl(var(--warm-white));
     transform: translateY(0);
     will-change: transform;
 }
@@ -527,30 +524,27 @@ body {
     grid-template-columns: 1fr;
 }
 
-/* Tarjeta con el versículo, centrada sobre la foto de portada */
+/* Versículo centrado sobre la foto de portada: solo texto, sin recuadro */
 .hero-quote-card {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
-    width: min(88%, 620px);
-    background: hsl(var(--warm-white) / 0.92);
-    border: 1px solid hsl(var(--gold) / 0.4);
-    border-radius: 4px;
-    padding: clamp(1.25rem, 4vw, 2.25rem) clamp(1.25rem, 5vw, 2.75rem);
+    width: min(88%, 640px);
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(2px);
 }
 
 .hero-quote-text {
     font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-weight: 600;
+    font-style: normal;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
     font-size: clamp(0.95rem, 2.6vw, 1.35rem);
     line-height: 1.5;
-    color: hsl(var(--wine));
+    color: hsl(var(--brown-dark));
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35), 0 1px 14px rgba(255, 255, 255, 0.5);
     margin-bottom: 0.75rem;
 }
 
@@ -560,11 +554,12 @@ body {
     letter-spacing: 0.08em;
     text-transform: uppercase;
     font-size: clamp(0.75rem, 1.8vw, 0.95rem);
-    color: hsl(var(--gold-dark));
+    color: hsl(var(--brown-dark));
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35), 0 1px 14px rgba(255, 255, 255, 0.5);
 }
 
 @media (max-width: 480px) {
-    .hero-quote-card { padding: 1.1rem 1.25rem; }
+    .hero-quote-card { width: 92%; }
 }
 
 /* Image container for left hero image */
@@ -736,7 +731,7 @@ body {
 .deco-divider {
     width: 100%;
     height: 20px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='190' height='20' viewBox='0 0 190 20'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='150' y2='0' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0%25' stop-color='%239B774C' stop-opacity='0'/%3E%3Cstop offset='25%25' stop-color='%239B774C' stop-opacity='0.85'/%3E%3Cstop offset='75%25' stop-color='%239B774C' stop-opacity='0.85'/%3E%3Cstop offset='100%25' stop-color='%239B774C' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0,10 Q75,5 150,10' stroke='url(%23g)' stroke-width='0.9' fill='none'/%3E%3Ccircle cx='159' cy='9.6' r='0.7' fill='%239B774C' opacity='0.75'/%3E%3Ccircle cx='164' cy='9.3' r='1.3' fill='%239B774C' opacity='0.85'/%3E%3Ccircle cx='170' cy='9.8' r='0.6' fill='%239B774C' opacity='0.6'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='190' height='20' viewBox='0 0 190 20'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='150' y2='0' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0%25' stop-color='%23A92D2D' stop-opacity='0'/%3E%3Cstop offset='25%25' stop-color='%23A92D2D' stop-opacity='0.85'/%3E%3Cstop offset='75%25' stop-color='%23A92D2D' stop-opacity='0.85'/%3E%3Cstop offset='100%25' stop-color='%23A92D2D' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0,10 Q75,5 150,10' stroke='url(%23g)' stroke-width='0.9' fill='none'/%3E%3Ccircle cx='159' cy='9.6' r='0.7' fill='%23A92D2D' opacity='0.75'/%3E%3Ccircle cx='164' cy='9.3' r='1.3' fill='%23A92D2D' opacity='0.85'/%3E%3Ccircle cx='170' cy='9.8' r='0.6' fill='%23A92D2D' opacity='0.6'/%3E%3C/svg%3E");
     background-repeat: round no-repeat;
     background-position: center;
     opacity: 0.7;
