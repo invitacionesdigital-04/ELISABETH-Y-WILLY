@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Elizabeth & Willy - Invitación de Boda</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin>
+    <link rel="preload" as="image" href="https://raw.githubusercontent.com/invitacionesdigital-04/Numerodecuenta/main/foto0.jpg" imagesrcset="https://raw.githubusercontent.com/invitacionesdigital-04/Numerodecuenta/main/foto0.jpg 1920w" imagesizes="100vw">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="ccs-2.css?v=force-20250902-01">
+    <script src="https://cdn.lordicon.com/lordicon.js"></script>
+</head>
+<body>
+    <!-- Modal de Bienvenida -->
+    <div id="welcomeModal" class="modal-overlay">
+        <div class="modal-content welcome-hero">
+            <div class="welcome-date">28·11·2026</div>
+            <h1 class="welcome-heading">Bienvenidos a la invitación de<br class="welcome-break" />
+                <span class="names">Elizabeth</span> <span class="ampersand">&</span> <span class="names">Willy</span>
+            </h1>
+            <p class="welcome-subtitle">La música de fondo es parte de la experiencia</p>
+            <div class="modal-buttons">
+                <button id="enterWithMusic" class="btn-wedding">Ingresar con música</button>
+                <button id="enterWithoutMusic" class="btn-wedding" style="background:linear-gradient(135deg, hsl(var(--gold-dark)), hsl(var(--gold)));">Ingresar sin música</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reproductor de música -->
+    <div id="musicPlayer" class="music-player" style="display: none;">
+        <button id="musicToggle" class="music-button animated-volume" title="Reproducir/Pausar música">
+            <svg id="volumeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <defs>
+                    <linearGradient id="volumeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#1abc9c;stop-opacity:1" />
+                        <stop offset="50%" style="stop-color:#16a085;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#27ae60;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <!-- Altavoz -->
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" 
+                         fill="url(#volumeGradient)" stroke="url(#volumeGradient)" class="speaker">
+                    <animateTransform attributeName="transform" type="scale" 
+                        values="1;1.1;1" dur="2s" repeatCount="indefinite"/>
+                </polygon>
+                
+                <!-- Ondas sonoras animadas -->
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14" 
+                      stroke="url(#volumeGradient)" stroke-width="2" fill="none" opacity="0" class="sound-wave-outer">
+                    <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite" begin="0s"/>
+                    <animate attributeName="stroke-width" values="1.5;2.5;1.5" dur="1.5s" repeatCount="indefinite" begin="0s"/>
+                </path>
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.08" 
+                      stroke="url(#volumeGradient)" stroke-width="2" fill="none" opacity="0" class="sound-wave-inner">
+                    <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite" begin="0.5s"/>
+                    <animate attributeName="stroke-width" values="1.5;2.5;1.5" dur="1.5s" repeatCount="indefinite" begin="0.5s"/>
+                </path>
+                
+                <!-- Partículas de sonido -->
+                <circle cx="13" cy="8" r="0.5" fill="#1abc9c" opacity="0" class="sound-particle">
+                    <animate attributeName="opacity" values="0;1;0" dur="1s" repeatCount="indefinite" begin="0s"/>
+                    <animateTransform attributeName="transform" type="translate" values="0,0;3,-2" dur="1s" repeatCount="indefinite" begin="0s"/>
+                </circle>
+                <circle cx="13" cy="16" r="0.5" fill="#16a085" opacity="0" class="sound-particle">
+                    <animate attributeName="opacity" values="0;1;0" dur="1.2s" repeatCount="indefinite" begin="0.3s"/>
+                    <animateTransform attributeName="transform" type="translate" values="0,0;3,2" dur="1.2s" repeatCount="indefinite" begin="0.3s"/>
+                </circle>
+                <circle cx="13" cy="12" r="0.8" fill="#27ae60" opacity="0" class="sound-particle">
+                    <animate attributeName="opacity" values="0;1;0" dur="0.8s" repeatCount="indefinite" begin="0.6s"/>
+                    <animateTransform attributeName="transform" type="translate" values="0,0;4,0" dur="0.8s" repeatCount="indefinite" begin="0.6s"/>
+                </circle>
+            </svg>
+        </button>
+        <div id="youtube-player" style="position: absolute; top: -9999px; left: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none;"></div>
+    </div>
+    
+    <main>
+    <!-- Hero Section dividida 50/50 -->
+    <div class="hero-wrapper">
+        <div class="site-container hero-container">
+            <div class="hero-split">
+                <!-- Lado izquierdo: mantiene imagen y efecto scroll -->
+                <div class="hero-left">
+                    <div class="hero-left-bg"></div>
+                </div>
+                <!-- Lado derecho: imagen sin efecto -->
+                <div class="hero-right">
+                    <!-- Portada (foto0) -->
+                    <img src="https://raw.githubusercontent.com/invitacionesdigital-04/Numerodecuenta/main/foto0.jpg" alt="Elizabeth y Willy" loading="lazy" decoding="async" fetchpriority="low" />
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Content -->
+    <div class="page-shell">
+        <div class="content">
+            <div class="site-container">
+            <!-- Bendición e introducción -->
+            <section class="intro-section section-shadow-seam">
+                <p class="intro-lead">Nuestro destino ya estaba escrito<br>y por fin ha llegado el momento de<br>compartirlo con ustedes.</p>
+                <p class="intro-shout">¡Nos casamos!</p>
+                <p class="intro-blessing">Con la bendición de Dios<br>y nuestras familias</p>
+                <p class="intro-families">Familia Gómez<br>&amp;<br>Familia Pérez</p>
+                <p class="intro-lead">Queremos compartir con ustedes la<br>alegría de nuestro matrimonio</p>
+            </section>
+
+            <!-- Countdown -->
+            <section class="countdown-section section-shadow-seam">
+                <h2 class="section-title">Falta</h2>
+                <div class="countdown-container">
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="days">00</div>
+                        <div class="countdown-label">DÍAS</div>
+                    </div>
+                    <div class="countdown-separator">|</div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="hours">00</div>
+                        <div class="countdown-label">HS</div>
+                    </div>
+                    <div class="countdown-separator">|</div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="minutes">00</div>
+                        <div class="countdown-label">MIN</div>
+                    </div>
+                    <div class="countdown-separator">|</div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="seconds">00</div>
+                        <div class="countdown-label">SEG</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Saludo para invitados (visible solo si la URL trae ?invitados= o ?familia=) -->
+            <section id="guestSection" class="guest-section" style="display:none;">
+                <div id="guestBadge" class="guest-badge">0</div>
+                <h2 class="guest-title">Invitados</h2>
+                <p id="guestSubtitle" class="guest-subtitle" style="display:none;"></p>
+                <div id="guestGreeting" class="guest-greeting"></div>
+                <p class="guest-closing">Tu presencia es lo más importante. ¡No faltes!</p>
+                <p class="guest-note">No se permiten niños.</p>
+            </section>
+
+            <!-- Ceremony -->
+            <section class="events-section section-shadow-seam">
+                <div class="events-container events-container--single">
+                    <div class="event-card event-card--single">
+                        <div class="event-icon animated-heart">
+                            <lord-icon
+                                src="https://cdn.lordicon.com/nvsfzbop.json"
+                                trigger="loop"
+                                state="morph-glitter"
+                                colors="primary:#9B774C,secondary:#9B774C"
+                                style="width:250px;height:250px">
+                            </lord-icon>
+                        </div>
+                        <h3 class="event-title">Ceremonia</h3>
+                        <div class="event-details">
+                            <h4>Día</h4>
+                            <p>Sábado 28 de Noviembre, 2026 - 05:00 PM</p>
+                        </div>
+                        <div class="event-details">
+                            <h4>Lugar</h4>
+                            <p>La Rambla - Restaurante y Eventos</p>
+                            <p class="event-address">C/ Cesar Nicolás Penson, 157, La Esperilla. República Dominicana</p>
+                        </div>
+                        <button class="btn-wedding" onclick="openLocation('ceremony')">¿Cómo llegar?</button>
+                    </div>
+                </div>
+                <blockquote class="verse-block">
+                    <p>“Así que, no son ya más dos, sino una sola carne; por tanto, lo que Dios ha unido, no lo separe el hombre”</p>
+                    <cite>Mateo 19:6</cite>
+                </blockquote>
+            </section>
+
+            <!-- Photo Gallery -->
+            <section class="gallery-section section-shadow-seam">
+                <div class="deco-divider deco-divider--top"></div>
+
+                <div class="gallery-container">
+                    <h2 class="section-title">Retratos de Nuestro Amor</h2>
+                    <p class="section-subtitle">Un minuto, un segundo, un instante que queda en la eternidad</p>
+                    
+                    <div class="camera-icon animated-camera">
+                        <lord-icon
+                            src="https://cdn.lordicon.com/wsaaegar.json"
+                            trigger="loop"
+                            colors="primary:#9B774C,secondary:#9B774C"
+                            style="width:280px;height:280px">
+                        </lord-icon>
+                    </div>
+
+            <!-- Carrusel -->
+                    <div class="carousel-container">
+                        <button class="carousel-btn carousel-prev" id="prevBtn">❮</button>
+                        <div class="carousel-track-container">
+                            <div class="carousel-track" id="carouselTrack">
+                                <div class="carousel-item">
+                                    <img src="https://raw.githubusercontent.com/invitacionesdigital-04/Numerodecuenta/main/foto1.jpg" alt="foto1">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="https://raw.githubusercontent.com/invitacionesdigital-04/Numerodecuenta/main/foto2.jpg" alt="foto2">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="https://raw.githubusercontent.com/invitacionesdigital-04/Numerodecuenta/main/foto3.jpg" alt="foto3">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="https://raw.githubusercontent.com/invitacionesdigital-04/Numerodecuenta/main/foto4.jpg" alt="foto4">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="https://raw.githubusercontent.com/invitacionesdigital-04/Numerodecuenta/main/foto5.jpg" alt="foto5">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="https://raw.githubusercontent.com/invitacionesdigital-04/Numerodecuenta/main/foto6.jpg" alt="foto6">
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-btn carousel-next" id="nextBtn">❯</button>
+                    </div>
+
+                    <div class="carousel-counter">
+                        <span id="currentSlide">1</span> / <span id="totalSlides">6</span> fotos
+                    </div>
+                </div>
+
+                <div class="deco-divider deco-divider--bottom"></div>
+            </section>
+
+            <!-- Vestimenta -->
+            <section class="party-section section-shadow-seam">
+                <div class="party-container">
+                    <h2 class="section-title">Vestimenta</h2>
+
+                    <div class="party-grid party-grid--single">
+                        <div class="party-card">
+                            <div class="party-icon animated-dresscode">
+                                <div class="tie-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                                        <g fill="#eeca66" stroke="#9B774C" stroke-width="2">
+                                            <polygon points="24,8 40,8 46,18 32,22 18,18"/>
+                                            <path d="M32 22 L44 56 L32 62 L20 56 Z" fill="#9B774C"/>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                            <h3 class="event-title">Formal</h3>
+                            <p><strong>Nota:</strong> favor no asistir con los siguientes colores.</p>
+                            <div class="color-swatches" aria-hidden="true">
+                                <span class="swatch" style="background:#600001;"></span>
+                                <span class="swatch" style="background:#ab847f;"></span>
+                                <span class="swatch" style="background:#dfc7ad;"></span>
+                                <span class="swatch swatch--white" style="background:#ffffff;"></span>
+                            </div>
+                            <button class="btn-wedding" onclick="showDressCode()">Ver más</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Gifts & RSVP -->
+            <section class="gifts-section section-shadow-seam">
+                <div class="deco-divider deco-divider--top"></div>
+
+                <div class="gifts-container">
+                    <h2 class="section-title">Sugerencia de regalo</h2>
+                    <p class="section-subtitle">Nos sentimos muy afortunados en nuestras vidas y esperamos celebrar con ustedes. Si planeas hacernos un regalo, tienen la siguiente opción:</p>
+                    <div class="gift-icon animated-gift">
+                        <lord-icon
+                            src="https://cdn.lordicon.com/kezeezyg.json"
+                            trigger="loop"
+                            colors="primary:#9B774C,secondary:#9B774C"
+                            style="width:250px;height:250px">
+                        </lord-icon>
+                    </div>
+                    <div class="gift-account-card">
+                        <p class="gift-account-label">Reservas - Ahorro</p>
+                        <p class="gift-account-number" id="giftAccountNumber">9603411973</p>
+                        <p class="gift-account-holder">Elizabeth Gómez</p>
+                        <p class="gift-account-id">Cédula: 001-1612417-3</p>
+                        <button class="btn-wedding" onclick="copyGiftAccount()">Copiar número de cuenta</button>
+                    </div>
+                </div>
+
+                <div class="deco-divider deco-divider--bottom"></div>
+            </section>
+
+            <section class="rsvp-section section-shadow-seam">
+                <div class="rsvp-container">
+                    <h2 class="section-title">Confirmación</h2>
+                    <p class="section-subtitle">Por favor confirmar asistencia antes del <strong>01 de septiembre del 2026</strong></p>
+                    <div class="whatsapp-icon animated-whatsapp" style="color:#9B774C">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.6-5.945C.122 5.29 5.33 0 12.057 0c3.14 0 6.087 1.223 8.312 3.447a11.7 11.7 0 013.448 8.291c-.002 6.73-5.21 11.938-11.94 11.938a11.95 11.95 0 01-6.09-1.616L.057 24zm6.597-3.807c1.742.995 3.276 1.591 5.392 1.593 5.448 0 9.89-4.434 9.894-9.882.002-5.462-4.415-9.89-9.88-9.893-5.462-.003-9.89 4.415-9.893 9.88-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.74-.98zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.03-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.94 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.173.198-.297.298-.495.099-.198.05-.372-.025-.521-.074-.149-.669-1.611-.916-2.206-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.48 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"></path>
+                        </svg>
+                    </div>
+                    <p class="rsvp-text">Confirma tu asistencia por WhatsApp.</p>
+                    <div class="rsvp-buttons">
+                        <button class="btn-wedding" onclick="confirmAttendance('elizabeth')">Confirmar con Elizabeth</button>
+                        <button class="btn-wedding" onclick="confirmAttendance('willy')">Confirmar con Willy</button>
+                    </div>
+                </div>
+            </section>
+            </div>
+        </div>
+    </div>
+    </main>
+
+    <!-- Toast notification -->
+    <div id="toast" class="toast">
+        <div id="toastContent"></div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h3>Elizabeth & Willy</h3>
+            <p class="footer-date">28 de Noviembre de 2026</p>
+        </div>
+    </footer>
+
+    <script src="java2.js?v=force-20250902-01"></script>
+</body>
+</html>
